@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorador de Publicaciones | JSONPlaceholder</title>
+    <link rel="stylesheet" href="/STYLES/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Cabecera de la Aplicación -->
+    <header class="app-header">
+        <div class="header-container">
+            <h1>📖 Explorador de Publicaciones</h1>
+            <p>Consumiendo y enviando datos a JSONPlaceholder</p>
+            
+            <!-- Acciones de Cabecera (Buscador y Botón Nuevo Post) -->
+            <div class="header-actions">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        placeholder="Buscar por título, contenido o autor..." 
+                        aria-label="Buscar por título, contenido o autor"
+                        autocomplete="off"
+                    >
+                </div>
+                <div class="filter-box">
+                    <label class="visually-hidden" for="user-filter">Filtrar por usuario</label>
+                    <select id="user-filter">
+                        <option value="">Todos los usuarios</option>
+                    </select>
+                </div>
+                <button id="open-modal-btn" class="btn-primary">➕ Nueva Publicación</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="app-main">
+        <div id="loading-spinner" class="spinner-container hidden">
+            <div class="spinner"></div>
+            <p>Cargando publicaciones...</p>
+        </div>
+
+        <div id="error-message" class="error-container hidden">
+            <p>⚠️ Ocurrió un error al cargar los datos. Por favor, intenta nuevamente.</p>
+            <button id="retry-button" class="retry-button" type="button">Reintentar</button>
+        </div>
+
+        <p id="results-summary" class="results-summary" aria-live="polite" aria-atomic="true"></p>
+        <section id="posts-container" class="posts-grid"></section>
+        <nav id="pagination-controls" class="pagination-controls hidden" aria-label="Paginación de publicaciones">
+            <button id="previous-page-btn" class="pagination-button" type="button">Anterior</button>
+            <span id="page-indicator" aria-live="polite" aria-atomic="true"></span>
+            <button id="next-page-btn" class="pagination-button" type="button">Siguiente</button>
+        </nav>
+    </main>
+
+    <!-- Modal para Crear Nueva Publicación -->
+    <div id="post-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="post-modal-title">
+        <div class="modal-content" tabindex="-1">
+            <button id="close-modal-btn" class="close-btn" type="button" aria-label="Cerrar">&times;</button>
+            <h2 id="post-modal-title">Crear Nueva Publicación</h2>
+            <form id="new-post-form">
+                <div class="form-group">
+                    <label for="new-title">Título</label>
+                    <input type="text" id="new-title" required placeholder="Ej. Mi primer post con fetch...">
+                </div>
+                <div class="form-group">
+                    <label for="new-body">Contenido</label>
+                    <textarea id="new-body" rows="4" required placeholder="Escribe el contenido de tu publicación aquí..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary full-width">Publicar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal con los datos del usuario asociado a la publicación -->
+    <div id="user-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="user-modal-title">
+        <div class="modal-content" tabindex="-1">
+            <button id="close-user-modal-btn" class="close-btn" type="button" aria-label="Cerrar">&times;</button>
+            <h2 id="user-modal-title">Datos del usuario</h2>
+            <dl class="user-details">
+                <div><dt>ID</dt><dd id="user-id"></dd></div>
+                <div><dt>Nombre</dt><dd id="user-name"></dd></div>
+                <div><dt>Usuario</dt><dd id="user-username"></dd></div>
+                <div><dt>Correo</dt><dd id="user-email"></dd></div>
+                <div><dt>Teléfono</dt><dd id="user-phone"></dd></div>
+                <div><dt>Sitio web</dt><dd id="user-website"></dd></div>
+                <div><dt>Dirección</dt><dd id="user-address"></dd></div>
+                <div><dt>Ciudad</dt><dd id="user-city"></dd></div>
+                <div><dt>Empresa</dt><dd id="user-company"></dd></div>
+            </dl>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>Desarrollado con HTML5, CSS3 y JavaScript DOM API.</p>
+    </footer>
+
+    <script src="/SCRIPTS/app.js"></script>
+</body>
+</html>
